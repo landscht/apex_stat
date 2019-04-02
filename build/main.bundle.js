@@ -122,6 +122,8 @@ function () {
 
     _defineProperty(this, "labels", void 0);
 
+    _defineProperty(this, "min", void 0);
+
     this.title = title;
     this.chart = chart;
     this.data = data;
@@ -133,13 +135,20 @@ function () {
 
       id++;
     });
+
+    if (this.title === "Position") {
+      this.min = 1;
+    } else {
+      this.min = 0;
+    }
   }
 
   _createClass(Generator, [{
     key: "generate",
     value: function generate() {
       console.log(this.labels);
-      var corps = "<canvas id=\"".concat(this.chart, "\" width=\"200\" height=\"50\"></canvas>\n<script>\nvar ctx = document.getElementById('").concat(this.chart, "').getContext('2d');\nvar myChart = new Chart(ctx, {\n    type: 'line',\n    data: {\n        labels: [").concat(this.labels, "],\n        datasets: [{\n            label: \"test\",\n            data: [").concat(this.data, "],\n            backgroundColor: [\n                'rgba(").concat(this.color, ", 0.05)',\n            ],\n            borderColor: [\n                'rgba(").concat(this.color, ", 1)',\n            ],\n            borderWidth: 1\n\t\t}]\n    },\n    options: {\n        legend: {\n            display: \"false\"\n        },\n        title: {\n            text: \"").concat(this.title, "\",\n            display: \"true\"\n        },\n        elements: {\n            point: {\n                radius: 3,\n                backgroundColor: 'rgba(").concat(this.color, ", 1)',\n            }\n        }\n    }\n});\n</script>");
+      console.log(this.min);
+      var corps = "<canvas id=\"".concat(this.chart, "\" width=\"200\" height=\"50\"></canvas>\n<script>\nvar ctx = document.getElementById('").concat(this.chart, "').getContext('2d');\nvar myChart = new Chart(ctx, {\n    type: 'line',\n    data: {\n        labels: [").concat(this.labels, "],\n        datasets: [{\n            label: \"test\",\n            data: [").concat(this.data, "],\n            backgroundColor: [\n                'rgba(").concat(this.color, ", 0.05)',\n            ],\n            borderColor: [\n                'rgba(").concat(this.color, ", 1)',\n            ],\n            borderWidth: 1\n\t\t}]\n    },\n    options: {\n        legend: {\n            display: \"false\"\n        },\n        title: {\n            text: \"").concat(this.title, "\",\n            display: \"true\"\n        },\n        elements: {\n            point: {\n                radius: 3,\n                backgroundColor: 'rgba(").concat(this.color, ", 1)',\n            }\n        },\n        scales: {\n            yAxes: [{\n                ticks: {\n                    min: ").concat(this.min, "\n                }\n            }]\n        }\n    }\n});\n</script>");
       return corps;
     }
   }, {

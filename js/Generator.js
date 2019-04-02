@@ -5,6 +5,7 @@ export default class Generator {
     chart;
     color;
     labels;
+    min;
 
     constructor(title, chart, data, color) {
         this.title = title;
@@ -17,6 +18,11 @@ export default class Generator {
             this.labels.push(id);
             id++;
         })
+        if(this.title === "Position") {
+            this.min = 1;
+        }else{
+            this.min = 0;
+        }
     }
 
     set title(title) {
@@ -37,6 +43,7 @@ export default class Generator {
 
     generate() {
         console.log(this.labels);
+        console.log(this.min);
         const corps = `<canvas id="${this.chart}" width="200" height="50"></canvas>
 <script>
 var ctx = document.getElementById('${this.chart}').getContext('2d');
@@ -69,6 +76,13 @@ var myChart = new Chart(ctx, {
                 radius: 3,
                 backgroundColor: 'rgba(${this.color}, 1)',
             }
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: ${this.min}
+                }
+            }]
         }
     }
 });
