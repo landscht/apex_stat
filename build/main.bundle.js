@@ -108,6 +108,8 @@ var Generator =
 /*#__PURE__*/
 function () {
   function Generator(title, chart, data, color) {
+    var _this = this;
+
     _classCallCheck(this, Generator);
 
     _defineProperty(this, "title", void 0);
@@ -118,16 +120,26 @@ function () {
 
     _defineProperty(this, "color", void 0);
 
+    _defineProperty(this, "labels", void 0);
+
     this.title = title;
     this.chart = chart;
     this.data = data;
     this.color = color;
+    this.labels = [];
+    var id = 1;
+    this.data.forEach(function (label) {
+      _this.labels.push(id);
+
+      id++;
+    });
   }
 
   _createClass(Generator, [{
     key: "generate",
     value: function generate() {
-      var corps = "<canvas id=\"".concat(this.chart, "\" width=\"200\" height=\"50\"></canvas>\n<script>\nvar ctx = document.getElementById('").concat(this.chart, "').getContext('2d');\nvar myChart = new Chart(ctx, {\n    type: 'line',\n    data: {\n        datasets: [{\n            label: \"test\",\n            data: [").concat(this.data, "],\n            backgroundColor: [\n                'rgba(").concat(this.color, ", 0.05)',\n            ],\n            borderColor: [\n                'rgba(").concat(this.color, ", 1)',\n            ],\n            borderWidth: 1\n\t\t}]\n    },\n    options: {\n        legend: {\n            display: \"false\"\n        },\n        title: {\n            text: \"").concat(this.title, "\",\n            display: \"true\"\n        },\n        elements: {\n            point: {\n                radius: 3,\n                backgroundColor: 'rgba(").concat(this.color, ", 1)',\n            }\n        }\n    }\n});\n</script>");
+      console.log(this.labels);
+      var corps = "<canvas id=\"".concat(this.chart, "\" width=\"200\" height=\"50\"></canvas>\n<script>\nvar ctx = document.getElementById('").concat(this.chart, "').getContext('2d');\nvar myChart = new Chart(ctx, {\n    type: 'line',\n    data: {\n        labels: [").concat(this.labels, "],\n        datasets: [{\n            label: \"test\",\n            data: [").concat(this.data, "],\n            backgroundColor: [\n                'rgba(").concat(this.color, ", 0.05)',\n            ],\n            borderColor: [\n                'rgba(").concat(this.color, ", 1)',\n            ],\n            borderWidth: 1\n\t\t}]\n    },\n    options: {\n        legend: {\n            display: \"false\"\n        },\n        title: {\n            text: \"").concat(this.title, "\",\n            display: \"true\"\n        },\n        elements: {\n            point: {\n                radius: 3,\n                backgroundColor: 'rgba(").concat(this.color, ", 1)',\n            }\n        }\n    }\n});\n</script>");
       return corps;
     }
   }, {
@@ -210,6 +222,7 @@ function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.chartKill').html(chartKill.generate());
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.chartDegat').html(chartDegat.generate());
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.chartPosition').html(chartPosition.generate());
+      console.log(this.dataDegat);
     }
   }, {
     key: "mount",

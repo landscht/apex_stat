@@ -4,12 +4,19 @@ export default class Generator {
     data;
     chart;
     color;
+    labels;
 
     constructor(title, chart, data, color) {
         this.title = title;
         this.chart = chart;
         this.data = data;
         this.color = color;
+        this.labels = [];
+        let id = 1;
+        this.data.forEach(label => {
+            this.labels.push(id);
+            id++;
+        })
     }
 
     set title(title) {
@@ -29,12 +36,14 @@ export default class Generator {
     }
 
     generate() {
+        console.log(this.labels);
         const corps = `<canvas id="${this.chart}" width="200" height="50"></canvas>
 <script>
 var ctx = document.getElementById('${this.chart}').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'line',
     data: {
+        labels: [${this.labels}],
         datasets: [{
             label: "test",
             data: [${this.data}],

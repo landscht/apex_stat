@@ -70,6 +70,7 @@ export default class MainPage {
         $('.chartKill').html(chartKill.generate());
         $('.chartDegat').html(chartDegat.generate());
         $('.chartPosition').html(chartPosition.generate());
+        console.log(this.dataDegat);
     }
 
     mount(container) {
