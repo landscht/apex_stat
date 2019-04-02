@@ -86,6 +86,211 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./js/Generator.js":
+/*!*************************!*\
+  !*** ./js/Generator.js ***!
+  \*************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Generator; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Generator =
+/*#__PURE__*/
+function () {
+  function Generator(title, chart, data, color) {
+    _classCallCheck(this, Generator);
+
+    _defineProperty(this, "title", void 0);
+
+    _defineProperty(this, "data", void 0);
+
+    _defineProperty(this, "chart", void 0);
+
+    _defineProperty(this, "color", void 0);
+
+    this.title = title;
+    this.chart = chart;
+    this.data = data;
+    this.color = color;
+  }
+
+  _createClass(Generator, [{
+    key: "generate",
+    value: function generate() {
+      var corps = "<canvas id=\"".concat(this.chart, "\" width=\"200\" height=\"50\"></canvas>\n<script>\nvar ctx = document.getElementById('").concat(this.chart, "').getContext('2d');\nvar myChart = new Chart(ctx, {\n    type: 'line',\n    data: {\n        datasets: [{\n            label: \"test\",\n            data: [").concat(this.data, "],\n            backgroundColor: [\n                'rgba(").concat(this.color, ", 0.05)',\n            ],\n            borderColor: [\n                'rgba(").concat(this.color, ", 1)',\n            ],\n            borderWidth: 1\n\t\t}]\n    },\n    options: {\n        legend: {\n            display: \"false\"\n        },\n        title: {\n            text: \"").concat(this.title, "\",\n            display: \"true\"\n        },\n        elements: {\n            point: {\n                radius: 3,\n                backgroundColor: 'rgba(").concat(this.color, ", 1)',\n            }\n        }\n    }\n});\n</script>");
+      return corps;
+    }
+  }, {
+    key: "title",
+    set: function set(title) {
+      this.title = title;
+    },
+    get: function get() {
+      return this.title;
+    }
+  }, {
+    key: "data",
+    set: function set(data) {
+      this.data = data;
+    },
+    get: function get() {
+      return this.data;
+    }
+  }]);
+
+  return Generator;
+}();
+
+
+
+/***/ }),
+
+/***/ "./js/MainPage.js":
+/*!************************!*\
+  !*** ./js/MainPage.js ***!
+  \************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MainPage; });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Generator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Generator */ "./js/Generator.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var MainPage =
+/*#__PURE__*/
+function () {
+  function MainPage() {
+    _classCallCheck(this, MainPage);
+
+    _defineProperty(this, "corps", void 0);
+
+    _defineProperty(this, "dataKill", void 0);
+
+    _defineProperty(this, "dataDegat", void 0);
+
+    _defineProperty(this, "dataPosition", void 0);
+
+    this.dataDegat = [];
+    this.dataKill = [];
+    this.dataPosition = [];
+    this.corps = "<nav class=\"navbar navbar-light\">\n\t\t<span class=\"navbar-brand mb-0 h1\">Apex session</span>\n\t</nav>\n\t\t<!-- Button trigger modal -->\n\t\t<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModal\">\n\t\tAjouter une partie\n\t  </button>\n\t  \n\t  <!-- Modal -->\n\t  <div class=\"modal fade\" id=\"exampleModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\">\n\t\t<div class=\"modal-dialog\" role=\"document\">\n\t\t  <div class=\"modal-content\">\n\t\t\t<div class=\"modal-header\">\n\t\t\t  <h5 class=\"modal-title\" id=\"exampleModalLabel\">Entrez les statistiques de la partie</h5>\n\t\t\t  <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n\t\t\t\t<span aria-hidden=\"true\">&times;</span>\n\t\t\t  </button>\n\t\t\t</div>\n\t\t\t<div class=\"modal-body\">\n\t\t\t\t\t<form class=\"addPartie\">\n\t\t\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t\t  <label for=\"exampleInputEmail1\">kill</label>\n\t\t\t\t\t\t\t  <input name=\"kill\" type=\"number\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\" placeholder=\"\">\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t\t\t<label for=\"exampleInputPassword1\">Position</label>\n\t\t\t\t\t\t\t\t<input name=\"position\" type=\"number\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"\">\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t\t\t<label for=\"exampleInputPassword1\">Degats</label>\n\t\t\t\t\t\t\t\t<input name=\"degat\" type=\"number\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"\">\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-primary\">Cr\xE9er</button>\n\t\t\t\t\t\t  </form>\n\t\t\t</div>\n\t\t  </div>\n\t\t</div>\n\t  </div>\n\t<div class=\"chartKill container\">\n\n\t</div>\n\t<div class=\"chartDegat container\">\n\n\t</div>\n\t<div class=\"chartPosition container\">\n\n    </div>";
+    this.submit = this.submit.bind(this);
+  }
+
+  _createClass(MainPage, [{
+    key: "render",
+    value: function render() {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').html(this.corps);
+      var chartKill = new _Generator__WEBPACK_IMPORTED_MODULE_1__["default"]('Kill', 'chartKill', this.dataKill, '255,0,0');
+      var chartDegat = new _Generator__WEBPACK_IMPORTED_MODULE_1__["default"]('Degats', 'chartDegat', this.dataDegat, '0,255,0');
+      var chartPosition = new _Generator__WEBPACK_IMPORTED_MODULE_1__["default"]('Position', 'chartPosition', this.dataPosition, '0,0,255');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.chartKill').html(chartKill.generate());
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.chartDegat').html(chartDegat.generate());
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.chartPosition').html(chartPosition.generate());
+    }
+  }, {
+    key: "mount",
+    value: function mount(container) {
+      console.log("mounted");
+      var form = document.querySelector('.addPartie');
+      console.log(form);
+
+      if (!form) {
+        return;
+      }
+
+      form.addEventListener('submit', this.submit);
+    }
+  }, {
+    key: "submit",
+    value: function submit(event) {
+      var _this = this;
+
+      console.log("submit");
+      event.preventDefault();
+      var fieldNames = ['kill', 'position', 'degat'];
+      var values = {};
+      var errors = [];
+      fieldNames.forEach(function (fieldName) {
+        var value = _this.getFieldValue(fieldName);
+
+        if (!value) {
+          errors.push("Le champ ".concat(fieldName, " ne peut etre vide"));
+        }
+
+        values[fieldName] = value;
+      });
+      console.log('jarrive ici');
+
+      if (errors.length) {
+        alert(errors.join('\n'));
+      } else {
+        var form = document.querySelector('addPartie');
+        console.log('ici aussi');
+        console.log(values);
+        this.dataDegat.push(values.degat);
+        this.dataKill.push(values.kill);
+        this.dataPosition.push(values.position);
+        this.render();
+        this.mount();
+      }
+    }
+  }, {
+    key: "getFieldValue",
+    value: function getFieldValue(fieldName) {
+      // on récupère une référence vers le champ qui a comme attribut `name` la valeur fieldName (nom, base, prix_petite, etc.)
+      var field = document.querySelector("[name=".concat(fieldName, "]"));
+
+      if (field instanceof HTMLInputElement) {
+        // s'il s'agit d'un <input> on utilise la propriété `value`
+        // et on retourne la chaine de caractère saisie
+        return field.value != '' ? field.value : null;
+      } else if (field instanceof HTMLSelectElement) {
+        // s'il s'agit d'un <select> on utilise la propriété `selectedOptions`
+        var values = [];
+
+        for (var i = 0; i < field.selectedOptions.length; i++) {
+          values.push(field.selectedOptions[i].value);
+        } // et on retourne un tableau avec les valeurs sélectionnées
+
+
+        return values.length ? values : null;
+      }
+
+      return null;
+    }
+  }]);
+
+  return MainPage;
+}();
+
+
+
+/***/ }),
+
 /***/ "./js/main.js":
 /*!********************!*\
   !*** ./js/main.js ***!
@@ -99,11 +304,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Generator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Generator */ "./js/Generator.js");
+/* harmony import */ var _MainPage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MainPage */ "./js/MainPage.js");
 
 
-var data = [1, 2, 3, 4, 5];
-var corps = "<canvas id=\"myChart\" width=\"400\" height=\"400\"></canvas>\n<script>\nvar ctx = document.getElementById('myChart').getContext('2d');\nvar myChart = new Chart(ctx, {\n    type: 'line',\n    data: {\n        labels: [['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']],\n        datasets: [{\n            label: '# of Votes',\n\t\t\tdata: [".concat(data, "],\n            backgroundColor: [\n                'rgba(0, 0, 0, 0.0)',\n            ],\n            borderColor: [\n                'rgba(255, 99, 132, 1)',\n            ],\n            borderWidth: 1\n\t\t}]\n    },\n    options: {\n        scales: {\n            yAxes: [{\n                ticks: {\n                    beginAtZero: true\n                }\n            }]\n        }\n    }\n});\n</script>");
-jquery__WEBPACK_IMPORTED_MODULE_1___default()('.chart').html(corps);
+
+
+var mainPage = new _MainPage__WEBPACK_IMPORTED_MODULE_3__["default"]();
+mainPage.render();
+mainPage.mount();
 
 /***/ }),
 
