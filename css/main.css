@@ -5,3 +5,28 @@ body {
 nav {
 	background-color: #282828 
 }
+
+.boutonAdd {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+
+.table {
+	background-color: #282828 ;
+	color: white;
+	text-align: center
+}
+
+td, th {
+	border-color: #181818!important
+}
+
+.containerChart {
+	box-shadow: 1px 1px 12px rgb(7, 7, 7);
+}
+
+.addPartie input {
+	margin-right: 10px;
+	border-bottom: 2px solid #282828;
+}

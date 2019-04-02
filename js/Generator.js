@@ -42,6 +42,7 @@ export default class Generator {
     }
 
     generate() {
+        document.documentElement.style.overflow = '';
         console.log(this.labels);
         console.log(this.min);
         const corps = `<canvas id="${this.chart}" width="200" height="50"></canvas>
