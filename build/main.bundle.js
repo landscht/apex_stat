@@ -124,6 +124,8 @@ function () {
 
     _defineProperty(this, "min", void 0);
 
+    _defineProperty(this, "reverse", void 0);
+
     this.title = title;
     this.chart = chart;
     this.data = data;
@@ -138,8 +140,10 @@ function () {
 
     if (this.title === "Position") {
       this.min = 1;
+      this.reverse = true;
     } else {
       this.min = 0;
+      this.reverse = false;
     }
   }
 
@@ -149,7 +153,7 @@ function () {
       document.documentElement.style.overflow = '';
       console.log(this.labels);
       console.log(this.min);
-      var corps = "<canvas id=\"".concat(this.chart, "\" width=\"200\" height=\"50\"></canvas>\n<script>\nvar ctx = document.getElementById('").concat(this.chart, "').getContext('2d');\nvar myChart = new Chart(ctx, {\n    type: 'line',\n    data: {\n        labels: [").concat(this.labels, "],\n        datasets: [{\n            label: \"test\",\n            data: [").concat(this.data, "],\n            backgroundColor: [\n                'rgba(").concat(this.color, ", 0.05)',\n            ],\n            borderColor: [\n                'rgba(").concat(this.color, ", 1)',\n            ],\n            borderWidth: 1\n\t\t}]\n    },\n    options: {\n        legend: {\n            display: \"false\"\n        },\n        title: {\n            text: \"").concat(this.title, "\",\n            display: \"true\"\n        },\n        elements: {\n            point: {\n                radius: 3,\n                backgroundColor: 'rgba(").concat(this.color, ", 1)',\n            }\n        },\n        scales: {\n            yAxes: [{\n                ticks: {\n                    min: ").concat(this.min, "\n                }\n            }]\n        }\n    }\n});\n</script>");
+      var corps = "<canvas id=\"".concat(this.chart, "\" width=\"200\" height=\"50\"></canvas>\n<script>\nvar ctx = document.getElementById('").concat(this.chart, "').getContext('2d');\nvar myChart = new Chart(ctx, {\n    type: 'line',\n    data: {\n        labels: [").concat(this.labels, "],\n        datasets: [{\n            label: \"").concat(this.title, "\",\n            data: [").concat(this.data, "],\n            backgroundColor: [\n                'rgba(").concat(this.color, ", 0.0)',\n            ],\n            borderColor: [\n                'rgba(").concat(this.color, ", 1)',\n            ],\n            borderWidth: 1\n\t\t}]\n    },\n    options: {\n        legend: {\n            display: \"false\"\n        },\n        title: {\n            text: \"").concat(this.title, "\",\n            display: \"true\"\n        },\n        elements: {\n            point: {\n                radius: 3,\n                backgroundColor: 'rgba(").concat(this.color, ", 1)',\n            }\n        },\n        scales: {\n            yAxes: [{\n                ticks: {\n                    min: ").concat(this.min, ",\n                    reverse : ").concat(this.reverse, "\n                }\n            }]\n        }\n    }\n});\n</script>");
       return corps;
     }
   }, {
@@ -218,7 +222,7 @@ function () {
     this.dataDegat = [];
     this.dataKill = [];
     this.dataPosition = [];
-    this.corps = "\n        <nav class=\"navbar navbar-light\">\n\t\t    <span class=\"navbar-brand mb-0 h1\">Apex session</span>\n\t    </nav>\n\n        <div class=\"container\">\n            <button class=\"btn btn-success boutonAdd\">\n\t\t        Ajouter une partie\n            </button>\n            <div class=\"containerForm\">\n            <form class=\"form-inline addPartie\">\n                <div class=\"form-group mb-2\">\n                <input type=\"number\" class=\"form-control-plaintext\" id=\"staticEmail2\" name=\"kill\" placeholder=\"kill\">\n                </div>\n                <div class=\"form-group mb-2\">\n                <input type=\"number\" class=\"form-control-plaintext\" id=\"staticEmail2\" name=\"degat\" placeholder=\"degat\">\n                </div>\n                <div class=\"form-group mb-2\">\n                <input type=\"number\" class=\"form-control-plaintext\" id=\"staticEmail2\" name=\"position\" placeholder=\"position\">\n                </div>\n                <button type=\"submit\" class=\"btn btn-primary mb-2\">Cr\xE9er</button>\n            </form>\n          </div>\n            <div class=\"containerChart\">\n                <div class=\"chartKill\">\n\n                </div>\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th scope=\"col\">Total</th>\n                            <th scope=\"col\">Maximum</th>\n                            <th scope=\"col\">Moyenne</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr class=\"tableKill\">\n\n                        </tr>\n                    </tbody>\n                </table>\n            </div>\n            <div class=\"containerChart\">\n                <div class=\"chartDegat\">\n\n                </div>\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th scope=\"col\">Total</th>\n                            <th scope=\"col\">Maximum</th>\n                            <th scope=\"col\">Moyenne</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr class=\"tableDegat\">\n\n                        </tr>\n                    </tbody>\n                </table>\n            </div>\n            <div class=\"containerChart\">\n                <div class=\"chartPosition\">\n\n                </div>\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th scope=\"col\">Total</th>\n                            <th scope=\"col\">Maximum</th>\n                            <th scope=\"col\">Moyenne</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr class=\"tablePosition\">\n\n                        </tr>\n                    </tbody>\n                </table>\n            </div>\n        </div>\n    ";
+    this.corps = "\n        <nav class=\"navbar\">\n\t\t    <span class=\"navbar-brand mb-0 h1\">Apex session</span>\n\t    </nav>\n\n        <div class=\"container\">\n            <button class=\"btn btn-outline-success boutonAdd\">\n\t\t        Ajouter une partie\n            </button>\n            <button class=\"btn btn-outline-danger boutonRemove\">\n                Annuler partie\n            </button>\n            <div class=\"containerForm\">\n            <form class=\"form-inline addPartie\">\n                <div class=\"form-group mb-2\">\n                <input type=\"number\" class=\"form-control-plaintext\" id=\"staticEmail2\" name=\"kill\" placeholder=\"kill\">\n                </div>\n                <div class=\"form-group mb-2\">\n                <input type=\"number\" class=\"form-control-plaintext\" id=\"staticEmail2\" name=\"degat\" placeholder=\"degat\">\n                </div>\n                <div class=\"form-group mb-2\">\n                <input type=\"number\" class=\"form-control-plaintext\" id=\"staticEmail2\" name=\"position\" placeholder=\"position\">\n                </div>\n                <button type=\"submit\" class=\"btn btn-outline-primary mb-2\">Cr\xE9er</button>\n            </form>\n          </div>\n            <div class=\"containerChart\">\n                <div class=\"chartKill\">\n\n                </div>\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th scope=\"col\">Total</th>\n                            <th scope=\"col\">Maximum</th>\n                            <th scope=\"col\">Moyenne</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr class=\"tableKill\">\n\n                        </tr>\n                    </tbody>\n                </table>\n            </div>\n            <div class=\"containerChart\">\n                <div class=\"chartDegat\">\n\n                </div>\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th scope=\"col\">Total</th>\n                            <th scope=\"col\">Maximum</th>\n                            <th scope=\"col\">Moyenne</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr class=\"tableDegat\">\n\n                        </tr>\n                    </tbody>\n                </table>\n            </div>\n            <div class=\"containerChart\">\n                <div class=\"chartPosition\">\n\n                </div>\n                <table class=\"table table-bordered\">\n                    <thead>\n                        <tr>\n                            <th scope=\"col\">Total</th>\n                            <th scope=\"col\">Maximum</th>\n                            <th scope=\"col\">Moyenne</th>\n                        </tr>\n                    </thead>\n                    <tbody>\n                        <tr class=\"tablePosition\">\n\n                        </tr>\n                    </tbody>\n                </table>\n            </div>\n        </div>\n    ";
     this.submit = this.submit.bind(this);
   }
 
@@ -265,10 +269,24 @@ function () {
   }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').html(this.corps);
+      document.querySelector('.containerForm').style.display = 'none';
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.boutonAdd').click(function (data) {
         console.log("clique");
         document.querySelector('.containerForm').style.display = 'block';
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.boutonRemove').click(function (data) {
+        _this.dataDegat.pop();
+
+        _this.dataKill.pop();
+
+        _this.dataPosition.pop();
+
+        _this.render();
+
+        _this.mount();
       });
       var chartKill = new _Generator__WEBPACK_IMPORTED_MODULE_1__["default"]('Kill', 'chartKill', this.dataKill, '255,0,0');
       var chartDegat = new _Generator__WEBPACK_IMPORTED_MODULE_1__["default"]('Degats', 'chartDegat', this.dataDegat, '0,255,0');
@@ -298,7 +316,7 @@ function () {
   }, {
     key: "submit",
     value: function submit(event) {
-      var _this = this;
+      var _this2 = this;
 
       console.log("submit");
       event.preventDefault();
@@ -306,7 +324,7 @@ function () {
       var values = {};
       var errors = [];
       fieldNames.forEach(function (fieldName) {
-        var value = _this.getFieldValue(fieldName);
+        var value = _this2.getFieldValue(fieldName);
 
         if (!value) {
           errors.push("Le champ ".concat(fieldName, " ne peut etre vide"));
@@ -385,7 +403,6 @@ __webpack_require__.r(__webpack_exports__);
 var mainPage = new _MainPage__WEBPACK_IMPORTED_MODULE_3__["default"]();
 mainPage.render();
 mainPage.mount();
-document.querySelector('.containerForm').style.display = 'none';
 
 /***/ }),
 

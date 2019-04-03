@@ -13,13 +13,16 @@ export default class MainPage {
         this.dataKill = [];
         this.dataPosition = [];
         this.corps = `
-        <nav class="navbar navbar-light">
+        <nav class="navbar">
 		    <span class="navbar-brand mb-0 h1">Apex session</span>
 	    </nav>
 
         <div class="container">
-            <button class="btn btn-success boutonAdd">
+            <button class="btn btn-outline-success boutonAdd">
 		        Ajouter une partie
+            </button>
+            <button class="btn btn-outline-danger boutonRemove">
+                Annuler partie
             </button>
             <div class="containerForm">
             <form class="form-inline addPartie">
@@ -32,7 +35,7 @@ export default class MainPage {
                 <div class="form-group mb-2">
                 <input type="number" class="form-control-plaintext" id="staticEmail2" name="position" placeholder="position">
                 </div>
-                <button type="submit" class="btn btn-primary mb-2">Créer</button>
+                <button type="submit" class="btn btn-outline-primary mb-2">Créer</button>
             </form>
           </div>
             <div class="containerChart">
@@ -129,9 +132,17 @@ export default class MainPage {
 
     render() {
         $('body').html(this.corps);
+        document.querySelector('.containerForm').style.display = 'none';
         $('.boutonAdd').click((data) => {
             console.log("clique");
             document.querySelector('.containerForm').style.display = 'block';
+        })
+        $('.boutonRemove').click((data) => {
+            this.dataDegat.pop();
+            this.dataKill.pop();
+            this.dataPosition.pop();
+            this.render();
+            this.mount();
         })
         const chartKill = new Generator('Kill', 'chartKill', this.dataKill, '255,0,0');
         const chartDegat = new Generator('Degats', 'chartDegat', this.dataDegat, '0,255,0')

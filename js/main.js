@@ -8,4 +8,3 @@ const mainPage = new MainPage();
 
 mainPage.render();
 mainPage.mount();
-document.querySelector('.containerForm').style.display = 'none';

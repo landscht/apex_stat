@@ -6,6 +6,7 @@ export default class Generator {
     color;
     labels;
     min;
+    reverse;
 
     constructor(title, chart, data, color) {
         this.title = title;
@@ -20,8 +21,10 @@ export default class Generator {
         })
         if(this.title === "Position") {
             this.min = 1;
+            this.reverse = true;
         }else{
             this.min = 0;
+            this.reverse = false;
         }
     }
 
@@ -53,10 +56,10 @@ var myChart = new Chart(ctx, {
     data: {
         labels: [${this.labels}],
         datasets: [{
-            label: "test",
+            label: "${this.title}",
             data: [${this.data}],
             backgroundColor: [
-                'rgba(${this.color}, 0.05)',
+                'rgba(${this.color}, 0.0)',
             ],
             borderColor: [
                 'rgba(${this.color}, 1)',
@@ -81,7 +84,8 @@ var myChart = new Chart(ctx, {
         scales: {
             yAxes: [{
                 ticks: {
-                    min: ${this.min}
+                    min: ${this.min},
+                    reverse : ${this.reverse}
                 }
             }]
         }
